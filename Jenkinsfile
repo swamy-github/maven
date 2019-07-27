@@ -1,27 +1,29 @@
 node('master') 
 {
-  stage('ContinuousDownload')
+  stage('ContinuousDownload') 
   {
-    git 'https://github.com/intelliqittrainings/maven.git'
-  }
+    git 'https://github.com/selenium-saikrishna/maven.git'
+  } 
   stage('ContinuousBuild')
   {
       sh label: '', script: 'mvn package'
   }
   stage('ContinuousDeployment')
   {
-      sh label: '', script: 'scp /home/ubuntu/.jenkins/workspace/Spipeline/webapp/target/webapp.war ubuntu@172.31.89.159:/var/lib/tomcat8/webapps/testenv.war'
+     sh label: '', script: 'scp /home/ubuntu/.jenkins/workspace/ScriptedPipeline@2/webapp/target/webapp.war ubuntu@172.31.36.247:/var/lib/tomcat8/webapps/testwebapp.war'      
   }
   stage('ContinuousTesting')
   {
       git 'https://github.com/selenium-saikrishna/FunctionalTesting.git'
-      sh label: '', script: 'java -jar /home/ubuntu/.jenkins/workspace/Spipeline/testing.jar'
+      sh label: '', script: 'echo "Testing Passed"'
   }
   stage('ContinuousDelivery')
   {
-      input message: 'Waiting for Approval from Delivery Manager', submitter: 'Srinivas'
-      sh label: '', script: 'scp /home/ubuntu/.jenkins/workspace/Spipeline/webapp/target/webapp.war ubuntu@172.31.93.16:/var/lib/tomcat8/webapps/prodenv.war'
+      sh label: '', script: 'scp /home/ubuntu/.jenkins/workspace/ScriptedPipeline@2/webapp/target/webapp.war ubuntu@172.31.35.219:/var/lib/tomcat8/webapps/prodwebapp.war'      
   }
+  
+  
+  
   
   
   
