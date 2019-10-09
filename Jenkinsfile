@@ -1,5 +1,3 @@
-{
-    stage('ContinuousDownload') 
     {
         git 'https://github.com/intelliqittrainings/maven.git'
     }
