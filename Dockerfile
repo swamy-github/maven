@@ -1,7 +1,7 @@
 
 FROM tomcat:8
 
-RUN apt-get install -y openjdk-8-jdk
+FROM openjdk
 # copying war file
 COPY webapp/target/webapp.war /usr/local/tomcat/webapps/webapp.war
 
